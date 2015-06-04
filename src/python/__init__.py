@@ -1,5 +1,6 @@
 """
-djcs
+Copyright (C) 2015 __QDevor__.
+http://www.gnu.org/licenses/gpl-3.0.html
 """
 
 #
