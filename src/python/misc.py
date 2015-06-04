@@ -16,6 +16,11 @@ def getPath(sufix=""):
         pass
     return pathjoin(path, sufix).replace('\\','/')
 
+def getDataPath(sufix="data"):
+	path=getPath()
+	path = dirname(path)
+	path = dirname(path)
+	return pathjoin(path, sufix)
 
 import subprocess
 

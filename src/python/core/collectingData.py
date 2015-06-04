@@ -1,3 +1,4 @@
+#*- coding: utf-8 -*- 
 #
 #            Copyright (C) 2015 QDevor
 #
@@ -21,12 +22,19 @@ from sqlalchemy import create_engine
 from pandas.io.pytables import HDFStore
 import tushare as ts
 
-import ./misc as _
+import misc as djcs_misc
 
-def xls(code='000001'):
-    df = ts.get_today_ticks(code)
-    save_dir = _.getDataPath() + '/'
+def xls(code='000878'):
+    df = ts.get_hist_data(code)
+    #Ö±½Ó±£´æ
+    save_dir = djcs_misc.getDataPath() + '/'
     df.to_excel(save_dir + code + '.xlsx')
+    #df.to_excel(save_dir + code + '.xlsx', startrow=2,startcol=5)
 
-if __name__ == '__main__':
-    xls()
+def db(code='000878'):
+    df = ts.get_tick_data(code,date='2015-04-01')
+    engine = create_engine('mysql://root:123456@127.0.0.1/mystock?charset=utf8')
+#		db = MySQLdb.connect(host='127.0.0.1',user='root',passwd='123456',db="mystock",charset="utf8")
+#		df.to_sql('TICK_DATA',con=db,flavor='mysql')
+#		db.close()
+    df.to_sql('tick_data',engine,if_exists='append')
