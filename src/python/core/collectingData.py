@@ -14,17 +14,19 @@
 # limitations under the License.
 #
 
-DJCS_TOP = os.getcwd()
-DJCS_CURRENT_SCRIPT_DIR = sys.path[0]
-# DJCS_CURRENT_SCRIPT_DIR = sys.argv[0]
-# DJCS_CURRENT_FILE_DIR = os.path.split(os.path.realpath(__file__))[0]
+import os
+import sys
 
-DJCS_DATA_DIR = DJCS_TOP + '/data'
-DJCS_DATA_DIR = os.environ.get("QDKe_DJCS_DATA_DIR",DJCS_DATA_DIR)
-if not os.path.exists(DJCS_DATA_DIR): os.makedirs(DJCS_DATA_DIR)
+from sqlalchemy import create_engine
+from pandas.io.pytables import HDFStore
+import tushare as ts
 
-def getDataPath():
-	dataPath = DJCS_DATA_DIR
-	if not os.path.exists(dataPath):
-		os.makedirs(dataPath)
-	return dataPath
+import ./misc as _
+
+def xls(code='000001'):
+    df = ts.get_today_ticks(code)
+    save_dir = _.getDataPath() + '/'
+    df.to_excel(save_dir + code + '.xlsx')
+
+if __name__ == '__main__':
+    xls()
