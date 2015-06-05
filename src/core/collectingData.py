@@ -23,12 +23,14 @@ from pandas.io.pytables import HDFStore
 import tushare as ts
 from tushare.util import dateu as du
 
+# import from parent directory
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
 import misc as _misc
 
 def xls(code='000878'):
-    df = ts.get_hist_data(code)
+    df = ts.get_today_ticks(code)
     #Ö±½Ó±£´æ
-    save_dir = _misc.getDataPath() + '/'
+    save_dir = _misc.getDir('data')
     df.to_excel(save_dir + code + '.xlsx')
     #df.to_excel(save_dir + code + '.xlsx', startrow=2,startcol=5)
 
