@@ -1,0 +1,3 @@
+[submodule "src/third_party/quant"]
+	path = src/third_party/quant
+	url = https://github.com/maihde/quant
