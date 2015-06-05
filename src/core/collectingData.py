@@ -23,6 +23,7 @@ from pandas.io.pytables import HDFStore
 import tushare as ts
 from tushare.util import dateu as du
 
+import coreMisc as cmisc
 # import from parent directory
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
 import misc as _misc

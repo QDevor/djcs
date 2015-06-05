@@ -22,11 +22,22 @@ def getPath(sufix=""):
     else:
     	return pathjoin(path, sufix).replace('\\','/')
 
-def getDataPath(sufix="data"):
+def getTopDir():
 	path=getPath()
 	path = dirname(path)
 	path = dirname(path)
-	return pathjoin(path, sufix)
+	return path
+
+def getDir(sufix=""):
+	if sufix == "":
+		path = getTopDir()
+	else:
+		path = pathjoin(getTopDir(), sufix)
+	
+	if not os.path.exists(path):
+	  os.makedirs(path)
+	  
+	return path
 
 import subprocess
 import commands
@@ -40,3 +51,13 @@ def getVersionInfor():
 	cmd='''cd %s && git log -1 |grep  commit |grep -o "\<[a-f0-9]\+\>"''' % path
 	build=subprocess.check_output(cmd, shell=True).strip('\n')
 	return (version, build)
+
+import os
+
+def __misc_init__():
+  os.environ["DJCS_TOP_DIR"] = getDir()
+  os.environ["QUANT_DIR"] = getDir("config")
+  print 'DJCS_TOP_DIR = ' + os.environ.get("DJCS_TOP_DIR")
+  print 'QUANT_DIR = ' + os.environ.get("QUANT_DIR")
+
+__misc_init__()

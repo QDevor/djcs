@@ -13,8 +13,8 @@ import misc
 import core.collectingData as ccd
 
 def collectingCS(code='000878'):
-    #ccd.xls(code)
-    ccd.db(code)
+    ccd.xls(code)
+    #ccd.db(code)
 
 if __name__=='__main__':
 	print misc.getVersionInfor()
