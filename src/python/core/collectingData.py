@@ -21,20 +21,23 @@ import sys
 from sqlalchemy import create_engine
 from pandas.io.pytables import HDFStore
 import tushare as ts
+from tushare.util import dateu as du
 
-import misc as djcs_misc
+import misc as _misc
 
 def xls(code='000878'):
     df = ts.get_hist_data(code)
     #直接保存
-    save_dir = djcs_misc.getDataPath() + '/'
+    save_dir = _misc.getDataPath() + '/'
     df.to_excel(save_dir + code + '.xlsx')
     #df.to_excel(save_dir + code + '.xlsx', startrow=2,startcol=5)
 
 def db(code='000878'):
-    df = ts.get_tick_data(code,date='2015-04-01')
-    engine = create_engine('mysql://root:123456@127.0.0.1/mystock?charset=utf8')
+	#print (code, du.last_tddate())
+	#df = ts.get_tick_data(code,date=du.last_tddate()) # 获取分笔数据 up to last trade day
+	df = ts.get_today_ticks(code) # 获取当日分笔明细数据
+	engine = create_engine('mysql://root:123456@127.0.0.1/mystock?charset=utf8')
 #		db = MySQLdb.connect(host='127.0.0.1',user='root',passwd='123456',db="mystock",charset="utf8")
 #		df.to_sql('TICK_DATA',con=db,flavor='mysql')
 #		db.close()
-    df.to_sql('tick_data',engine,if_exists='append')
+	df.to_sql('tick_data',engine,if_exists='append')

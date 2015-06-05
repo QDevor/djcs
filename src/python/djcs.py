@@ -17,7 +17,6 @@ def collectingCS(code='000878'):
     ccd.db(code)
 
 if __name__=='__main__':
-	print u'当前版本: '
 	print misc.getVersionInfor()
 	
 	collectingCS('600673')
