@@ -32,7 +32,7 @@ def xls(code='000878'):
     df = ts.get_today_ticks(code)
     #Ö±½Ó±£´æ
     save_dir = _misc.getDir('data')
-    df.to_excel(save_dir + code + '.xlsx')
+    df.to_excel(save_dir + '/' + code + '.xlsx')
     #df.to_excel(save_dir + code + '.xlsx', startrow=2,startcol=5)
 
 def db(code='000878'):

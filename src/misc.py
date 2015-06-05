@@ -30,13 +30,13 @@ def getTopDir():
 
 def getDir(sufix=""):
 	if sufix == "":
-		path = getTopDir()
+		path = pathjoin(getTopDir())
 	else:
 		path = pathjoin(getTopDir(), sufix)
 	
 	if not os.path.exists(path):
 	  os.makedirs(path)
-	  
+	
 	return path
 
 import subprocess
