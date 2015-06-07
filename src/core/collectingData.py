@@ -29,7 +29,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
 import misc as _misc
 
 def xls(code='000878'):
-    df = ts.get_today_ticks(code)
+    df = ts.get_hist_data(code)
     #直接保存
     save_dir = _misc.getDir('data')
     df.to_excel(save_dir + '/' + code + '.xlsx')
@@ -37,8 +37,8 @@ def xls(code='000878'):
 
 def db(code='000878'):
 	#print (code, du.last_tddate())
-	#df = ts.get_tick_data(code,date=du.last_tddate()) # 获取分笔数据 up to last trade day
-	df = ts.get_today_ticks(code) # 获取当日分笔明细数据
+	df = ts.get_tick_data(code,date=du.last_tddate()) # 获取分笔数据 up to last trade day
+	#df = ts.get_today_ticks(code) # 获取当日分笔明细数据
 	engine = create_engine('mysql://root:123456@127.0.0.1/mystock?charset=utf8')
 #		db = MySQLdb.connect(host='127.0.0.1',user='root',passwd='123456',db="mystock",charset="utf8")
 #		df.to_sql('TICK_DATA',con=db,flavor='mysql')

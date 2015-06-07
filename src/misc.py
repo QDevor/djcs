@@ -54,10 +54,27 @@ def getVersionInfor():
 
 import os
 
+def __misc_init_add_init_py_to_subir__(_dir=""):
+  if _dir == "":
+		return
+  
+  _dir = _dir.replace('/','\\')
+  new_path_filename=os.path.join(getTopDir(), 'src', _dir, '__init__.py')
+  f = open(new_path_filename.replace('\\','/'), 'w')
+  f.close()
+
+def __misc_init_third_party__():
+  __misc_init_add_init_py_to_subir__('third_party')
+  __misc_init_add_init_py_to_subir__('third_party/quantdigger')
+  __misc_init_add_init_py_to_subir__('third_party/quantdigger/quantdigger')
+  __misc_init_add_init_py_to_subir__('third_party/quantdigger/quantdigger/demo')
+  
 def __misc_init__():
   os.environ["DJCS_TOP_DIR"] = getDir()
   os.environ["QUANT_DIR"] = getDir("config")
   print 'DJCS_TOP_DIR = ' + os.environ.get("DJCS_TOP_DIR")
   print 'QUANT_DIR = ' + os.environ.get("QUANT_DIR")
+  
+  __misc_init_third_party__()
 
 __misc_init__()

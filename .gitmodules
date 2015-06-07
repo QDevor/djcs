@@ -1,3 +1,6 @@
 [submodule "src/third_party/quant"]
 	path = src/third_party/quant
 	url = https://github.com/maihde/quant
+[submodule "src/third_party/quantdigger"]
+	path = src/third_party/quantdigger
+	url = https://github.com/QuantFans/quantdigger
